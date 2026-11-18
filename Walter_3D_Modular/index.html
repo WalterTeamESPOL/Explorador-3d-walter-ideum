@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Walter · Explorador 3D</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    <div>
+      <strong>Walter, el robot humanoide</strong>
+      <span>Laboratorio interactivo</span>
+    </div>
+    <button id="full" type="button">Pantalla completa</button>
+  </header>
+  <main>
+    <section id="stage">
+      <canvas id="view" tabindex="0" aria-label="Robot Walter en 3D. Arrastra para girar, usa las flechas o los controles de zoom."></canvas>
+      <div class="intro">
+        <div class="eyebrow">Descubre cómo está formado</div>
+        <h1>Visualiza a Walter.</h1>
+        <p>Toca una sección para entrar.</p>
+      </div>
+      <div class="counter">Walter versión 2.0</div>
+      <div class="toolbar">
+        <button id="out" type="button" aria-label="Alejar">−</button>
+        <button id="in" type="button" aria-label="Acercar">+</button>
+        <button id="rotate" type="button" aria-label="Activar giro automático" aria-pressed="false" hidden>↻</button>
+        <button class="reset" id="reset" type="button">Restablecer vista</button>
+      </div>
+      <div class="experience-buttons" role="group" aria-label="Experiencias de Walter">
+        <button id="walter-mode" type="button">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true">
+            <rect x="4" y="6" width="16" height="14" rx="4"/>
+            <path d="M12 3v3M1 11v5M23 11v5"/>
+            <circle cx="8.5" cy="12" r="1" fill="currentColor"/>
+            <circle cx="15.5" cy="12" r="1" fill="currentColor"/>
+            <path d="M8 16c2 2 6 2 8 0"/>
+          </svg>
+          <span>Walter</span>
+        </button>
+        <button id="hologram-mode" type="button">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" aria-hidden="true">
+            <path d="m12 3 8 14H4L12 3Z"/>
+            <path d="M12 3v14M4 17l8 4 8-4M7 11h10"/>
+          </svg>
+          <span>Holograma</span>
+        </button>
+      </div>
+      <div class="hint"></div>
+      <div class="error" id="error" role="alert"></div>
+    </section>
+    <aside>
+      <div class="eyebrow">Explorador de componentes</div>
+      <h2>Pequeñas partes.<br>Grandes posibilidades.</h2>
+      <p class="muted">Elige una sección para verla sola y explorar su interior.</p>
+      <nav aria-label="Secciones de Walter"></nav>
+      <article class="detail" aria-live="polite">
+        <span class="pill" id="part-number"></span>
+        <h3 id="part-title">Walter completo</h3>
+        <div class="muted" id="part-description"></div>
+      </article>
+    </aside>
+  </main>
+  <script src="vendor/three.min.js"></script>
+  <script src="js/escena.js"></script>
+  <script src="js/modelo.js"></script>
+  <script src="js/interfaz.js"></script>
+  <script src="js/personalizacion.js"></script>
+  <script src="js/ropa.js"></script>
+  <script src="js/brazos.js"></script>
+  <script src="js/rostros.js"></script>
+  <script src="js/controles.js"></script>
+  <script src="js/animacion.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

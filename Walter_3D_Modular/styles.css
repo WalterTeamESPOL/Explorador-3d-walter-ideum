@@ -1,0 +1,267 @@
+/* Configuración general */
+:root{
+  color-scheme:dark;
+  --bg:#09131c;
+  --panel:#101e2b;
+  --card:#162838;
+  --text:#edf5fc;
+  --muted:#9aafc2;
+  --line:#2a3d4e;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font:15px "Segoe UI",Arial,sans-serif}
+button{font:inherit;color:inherit;cursor:pointer;-webkit-tap-highlight-color:transparent;transition:background .18s,border-color .18s,box-shadow .18s}
+button:focus-visible,input:focus-visible{outline:3px solid #68cfff;outline-offset:4px}
+[hidden]{display:none!important}
+
+/* Cabecera */
+header{height:72px;display:flex;align-items:center;justify-content:space-between;gap:20px;padding:0 28px;background:var(--bg);border-bottom:1px solid #20313f}
+header>div{display:flex;align-items:center;gap:18px;min-width:0}
+header strong{font-size:21px;font-weight:750;letter-spacing:-.5px}
+header>div>span{padding-left:18px;border-left:1px solid #354655;font-size:13px;color:#8db5cd;white-space:nowrap}
+#full{min-height:48px;padding:0 18px;border:1px solid #3a4a58;border-radius:13px;background:transparent;font-size:13px;font-weight:600;white-space:nowrap}
+#full:hover{background:#182a39;border-color:#698398}
+
+/* Distribución y visor */
+main{display:grid;grid-template-columns:minmax(0,1fr) 330px;height:calc(100dvh - 72px);min-height:590px}
+#stage{position:relative;min-width:0;overflow:hidden;isolation:isolate;background:#102235;container-type:inline-size}
+#stage::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(ellipse at 50% 55%,#1d3b57 0%,#102033 58%,#0b1722 100%)}
+#stage::after{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background-image:linear-gradient(#8dbce008 1px,transparent 1px),linear-gradient(90deg,#8dbce008 1px,transparent 1px);background-size:56px 56px}
+#view{display:block;width:100%;height:100%;touch-action:none}
+#view:focus-visible{outline:2px solid #68cfff;outline-offset:-3px}
+.intro{position:absolute;top:32px;left:36px;right:24px;pointer-events:none}
+.intro h1{max-width:calc(100% - 310px);margin:0 0 10px;font-size:clamp(32px,4.2vw,58px);font-weight:800;line-height:1.08;letter-spacing:-2px}
+.intro p{margin:0;color:#a9bdcd;font-size:17px;line-height:1.5}
+.counter{position:absolute;right:30px;top:38px;color:#8196a9;font-size:12px;font-weight:600}
+.intro>.eyebrow,aside>.eyebrow,#part-number,#components{display:none}
+#rotate,.hint{display:none!important}
+
+/* Zoom y restablecer: centro inferior */
+#stage>.toolbar{
+  position:absolute;left:50%;bottom:28px;z-index:2;
+  transform:translateX(-50%);display:flex;align-items:center;gap:4px;
+  margin:0;padding:7px;border:1px solid #304354;border-radius:19px;
+  background:#0a1722f5;box-shadow:0 12px 30px #0003;white-space:nowrap;
+}
+.toolbar button{display:grid;place-items:center;flex:none;width:54px;height:54px;border:0;border-radius:12px;background:transparent;font-size:25px}
+.toolbar button:hover{background:#21384b}
+.toolbar .reset{width:auto;margin-left:5px;padding:0 21px;border-left:1px solid #304354;border-radius:0 11px 11px 0;font-size:14px;font-weight:600}
+
+/* Volver y separar: abajo a la izquierda */
+#stage>.section-tools{
+  position:absolute;left:24px;bottom:28px;z-index:2;
+  display:flex;flex-direction:row;align-items:center;gap:8px;
+  min-height:70px;margin:0;
+}
+.section-tools button{flex:none;min-width:120px;height:54px;padding:0 14px;border:1px solid transparent;border-radius:12px;font-size:12px;font-weight:700;box-shadow:0 6px 18px #0003}
+#back{background:#132838;border-color:#47657b;color:#c7deee}
+#back:hover{background:#244258;border-color:#6c92ad}
+#open{background:#2862b0;border-color:#4687df}
+#open:hover{background:#3479cf;border-color:#80b4ff}
+#open[aria-expanded="true"]{background:#194c75;border-color:#53aed9}
+
+/* Experiencias: abajo a la derecha */
+#stage>.experience-buttons{
+  position:absolute;right:24px;bottom:28px;z-index:3;
+  display:flex;align-items:center;gap:10px;min-height:70px;margin:0;
+}
+.experience-buttons button{
+  display:flex;align-items:center;justify-content:center;gap:9px;
+  flex:none;min-height:54px;padding:0 16px;border:1px solid #4687df;
+  border-radius:12px;background:#2862b0;color:#edf5fc;
+  font-size:13px;font-weight:700;white-space:nowrap;
+  box-shadow:0 6px 18px #0003;touch-action:manipulation;
+}
+.experience-buttons svg{width:23px;height:23px;flex:none}
+#walter-mode:hover{background:#3479cf;border-color:#80b4ff}
+#hologram-mode{background:#112b3c;border-color:#508fac;color:#b5eaff}
+#hologram-mode:hover{background:#1b4055;border-color:#80d8fa}
+.experience-buttons button:active{box-shadow:inset 0 2px 7px #0004}
+
+/* Panel derecho de información */
+aside{min-height:0;min-width:0;overflow-y:auto;padding:24px 20px;background:var(--panel);border-left:1px solid #293b4c;scrollbar-width:none}
+aside::-webkit-scrollbar{display:none;width:0;height:0}
+aside h2{margin:0 0 9px;font-size:22px;line-height:1.18;font-weight:750;letter-spacing:-.65px}
+.muted{color:var(--muted);font-size:12px;line-height:1.65}
+aside>.muted{margin:0 0 16px;line-height:1.6}
+aside nav{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+
+/* Tarjetas de secciones */
+.part{--accent:#48c5f1;position:relative;display:flex;align-items:center;min-height:66px;width:100%;overflow:hidden;padding:11px 10px 11px 16px;text-align:left;border:1px solid #30475a;border-radius:12px;background:var(--card)}
+.part::before{content:"";position:absolute;top:0;bottom:0;left:0;width:5px;background:var(--accent)}
+.part[data-part="body"]{--accent:#6096f4}
+.part[data-part="arms"]{--accent:#ef8178}
+.part[data-part="base"]{--accent:#c6a77a}
+.part:hover{background:#213a4f;border-color:var(--accent)}
+.part.active{background:#233c50;border-color:var(--accent);box-shadow:0 0 0 1px var(--accent)}
+.part b{display:none}
+.part span{min-width:0;font-size:14px;font-weight:700}
+.part small{display:block;margin-top:4px;color:#a6bfd1;font-size:11px;font-weight:400;line-height:1.35}
+.detail{margin-top:20px;padding-top:17px;border-top:2px solid #324a5f}
+.detail h3{margin:0 0 8px;font-size:23px;line-height:1.2;font-weight:750;letter-spacing:-.6px}
+.detail>.muted{margin:0;white-space:pre-line;font-size:14px;line-height:1.65;color:#b8ccdc}
+
+/* Presentación de Walter */
+.walter-bio{display:block;white-space:normal;font-size:14px;line-height:1.7;color:#b8ccdc}
+.walter-bio strong{color:#edf5fc;font-weight:650}
+.walter-tags{display:flex;flex-wrap:wrap;gap:6px;margin:4px 0 16px}
+.walter-tags>span{padding:4px 9px;border:1px solid #34556c;border-radius:8px;background:#172f40;color:#a4ddfa;font-size:11px;font-weight:600;line-height:1.5}
+.walter-paragraph{display:block}
+.walter-section{display:block;margin-top:20px;padding-top:16px;border-top:1px solid #293f50}
+.walter-subtitle{display:block;margin-bottom:8px;color:#79d1f5;font-size:15px;font-weight:700;line-height:1.4}
+.walter-events{display:grid;gap:9px}
+.walter-events>span{position:relative;display:block;padding-left:15px;font-size:13px;line-height:1.5}
+.walter-events>span::before{content:"";position:absolute;left:0;top:7px;width:5px;height:5px;border-radius:50%;background:#63c9ef}
+.walter-callout{display:block;margin-top:22px;padding:14px;border:1px solid #32576e;border-left:3px solid #63c9ef;border-radius:10px;background:#152d3e}
+.walter-callout>strong{display:block;margin-bottom:5px;color:#d4efff;font-size:13px}
+.walter-callout>span{display:block;font-size:12px;line-height:1.6}
+
+/* Versiones y acceso a personalización */
+.version-controls{position:absolute;top:30px;right:24px;z-index:5;display:flex;align-items:center;gap:10px;max-width:calc(100% - 48px)}
+.version-rail{display:flex;gap:8px;min-width:0;max-width:240px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none}
+.version-rail::-webkit-scrollbar{display:none}
+.version-option,#customize{flex:none;min-height:46px;padding:0 15px;border:1px solid #38546b;border-radius:12px;background:#112535;font-size:12px;font-weight:650;white-space:nowrap}
+.version-option{scroll-snap-align:start}
+.version-option[aria-pressed="true"]{border-color:#5e9cc8;color:#c6e8ff;background:#19364b}
+#customize{background:#245b9e;border-color:#4387d7}
+#customize:hover,#customize.active{background:#3276c5;border-color:#8ac8ff}
+
+/* Desplegable de personalización */
+#custom-panel{
+  position:absolute;top:calc(100% + 12px);right:0;z-index:10;
+  width:400px;max-width:calc(100vw - 48px);
+  max-height:min(560px,calc(100dvh - 210px));
+  overflow-y:auto;overscroll-behavior:contain;margin:0;padding:22px;
+  border:1px solid #3b5870;border-radius:16px;background:#102231;
+  box-shadow:0 18px 48px #0007;scrollbar-width:thin;scrollbar-color:#45647d transparent;
+}
+#custom-panel .custom-heading{display:flex;align-items:center;justify-content:space-between;gap:12px}
+#custom-panel .custom-caption{font-size:11px;font-weight:650;letter-spacing:1.5px;color:#80bde8}
+#custom-title{margin:7px 0 0;font-size:24px;line-height:1.2;letter-spacing:-.5px}
+#custom-close{flex:none;min-height:44px;padding:0 14px;border:1px solid #385169;border-radius:10px;background:#192e40;font-size:13px}
+#custom-close:hover{background:#29465d}
+#custom-panel .muted{margin:15px 0;font-size:14px;line-height:1.65}
+
+/* Primer nivel: color o ropa */
+#custom-panel .custom-menu{display:grid;gap:12px;margin-top:18px}
+#custom-panel .custom-choice{display:flex;flex-direction:column;gap:7px;width:100%;min-height:88px;padding:18px;text-align:left;border:1px solid #3b5870;border-radius:13px;background:#172f42}
+#custom-panel .custom-choice:hover{background:#23465f;border-color:#75b8e8}
+#custom-panel .custom-choice span{font-size:17px;font-weight:650}
+#custom-panel .custom-choice small{font-size:13px;line-height:1.5;color:#adc4d6}
+#custom-panel .custom-return{min-height:44px;margin-top:16px;padding:8px 12px;border:1px solid #38546b;border-radius:10px;background:#142a3b;color:#c6e4f7;font-size:13px}
+#custom-panel .custom-return:hover{background:#23465f;border-color:#75b8e8}
+
+/* Segundo nivel: selector libre de color */
+#custom-panel .custom-row{padding:16px 0;border-top:1px solid #273d50}
+#custom-panel .custom-row:first-child{border-top:0}
+#custom-panel .custom-row-title{display:flex;align-items:center;justify-content:space-between;gap:14px;margin:0}
+#custom-panel .custom-row-title>span{min-width:0;font-size:16px;line-height:1.35;font-weight:600}
+#custom-panel .custom-color-label{display:flex;flex-shrink:0;align-items:center;gap:10px;color:#bdd0df;font-size:13px;cursor:pointer}
+#custom-panel .custom-color-label input{width:50px;height:50px;padding:4px;border:1px solid #405d74;border-radius:9px;background:#112535;cursor:pointer}
+.color-palette{display:none}
+#custom-reset{width:100%;min-height:50px;margin-top:14px;padding:10px;border:1px solid #45647d;border-radius:11px;background:#1a3347;font-size:15px;font-weight:650}
+#custom-reset:hover{background:#294d69}
+
+/* Segundo nivel: futura ropa y accesorios */
+#custom-panel .custom-coming{margin-top:18px;padding:20px;border:1px dashed #46637a;border-radius:13px;background:#142a3b}
+#custom-panel .custom-coming strong{font-size:17px;color:#b4ddfa}
+#custom-panel .custom-coming p{margin:10px 0 0;font-size:14px;line-height:1.65;color:#adc4d6}
+
+/* Ropa y accesorios */
+#custom-panel .outfit-presets{display:grid;gap:9px;margin:16px 0 22px}
+#custom-panel .outfit-presets button{min-height:50px;padding:12px 14px;border:1px solid #3d5d75;border-radius:11px;background:#183246;color:#e1eff9;text-align:left;font-size:14px;font-weight:600}
+#custom-panel .outfit-presets button:hover{background:#254b65;border-color:#76bce9}
+#custom-panel .outfit-presets button[aria-pressed="true"]{background:#24517a;border-color:#8ad4ff;box-shadow:inset 3px 0 #8ad4ff}
+#custom-panel .wardrobe-field{display:flex;flex-direction:column;gap:9px;margin-top:17px;font-size:15px;font-weight:600}
+#custom-panel .wardrobe-field select{width:100%;min-height:48px;padding:10px 12px;border:1px solid #42617a;border-radius:10px;background:#142b3d;color:#e8f3fc;font:14px "Segoe UI",Arial,sans-serif;cursor:pointer}
+#custom-panel .wardrobe-field select:focus-visible{outline:3px solid #68cfff;outline-offset:3px}
+#custom-panel #remove-clothes{width:100%;min-height:50px;margin-top:24px;padding:12px;border:1px solid #45647d;border-radius:11px;background:#1a3347;font-size:14px;font-weight:650}
+#custom-panel #remove-clothes:hover{background:#294d69}
+#custom-panel .wardrobe-status{margin:12px 0 0;font-size:12px;line-height:1.5;color:#acd7f3}
+#custom-panel .wardrobe-status:empty{display:none}
+
+/* Selector de expresiones */
+#face-options{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:18px}
+#custom-panel .face-choice{min-height:58px;padding:14px;border:1px solid #3d5d75;border-radius:12px;background:#183246;color:#e1eff9;font-size:16px;font-weight:650}
+#custom-panel .face-choice:hover{background:#254b65;border-color:#76bce9}
+#custom-panel .face-choice[aria-pressed="true"]{background:#24517a;border-color:#8ad4ff;box-shadow:inset 0 -3px #8ad4ff}
+
+/* Mensajes de error */
+.error{display:none;position:absolute;top:40%;left:20px;right:20px;z-index:6;padding:24px;border:1px solid #a56767;border-radius:14px;background:#35272f;color:#ffe5e5;line-height:1.6}
+
+/* Pantallas grandes */
+@media(min-width:1600px){
+  main{grid-template-columns:minmax(0,1fr) 360px}
+  aside{padding:28px 24px}
+}
+
+/* Ventanas intermedias */
+@media(max-width:1100px){
+  header strong{font-size:19px}
+  .intro{left:26px}
+  .counter{display:none}
+}
+
+/* Móvil: información debajo del visor */
+@media(max-width:800px){
+  header{height:auto;min-height:72px;padding:12px 18px;gap:12px}
+  header strong{font-size:18px}
+  header>div>span{display:none}
+  #full{min-height:44px;padding:0 12px;font-size:11px}
+  main{height:auto;min-height:0;grid-template-columns:1fr}
+  #stage{height:68dvh;min-height:480px}
+  aside{overflow:visible;padding:22px 20px;border-left:0;border-top:1px solid var(--line)}
+  .intro{top:25px;left:22px}
+  .intro h1{letter-spacing:-1.5px}
+  .intro p{font-size:15px}
+  aside h2 br{display:none}
+}
+
+/* Selector debajo del título si falta espacio */
+@container(max-width:950px){
+  .intro h1{max-width:100%;font-size:clamp(30px,5.5cqw,46px)}
+  .version-controls{top:145px;left:24px;right:auto}
+  #custom-panel{left:0;right:auto;max-width:calc(100cqw - 48px);max-height:min(420px,calc(100dvh - 320px))}
+}
+
+/* Compactar controles sin subir la barra de zoom */
+@container(max-width:960px){
+  #stage>.section-tools{left:12px;gap:6px}
+  .section-tools button{min-width:0;padding:0 9px;font-size:11px}
+  .toolbar button{width:44px}
+  .toolbar .reset{padding:0 10px;font-size:12px}
+  #stage>.experience-buttons{right:12px;gap:6px}
+  .experience-buttons button{padding:0 10px;gap:6px;font-size:12px}
+  .experience-buttons svg{width:20px;height:20px}
+}
+
+/* Visor estrecho: zoom abajo y acciones en la fila superior */
+@container(max-width:760px){
+  #stage>.toolbar{bottom:16px}
+  #stage>.section-tools{left:12px;right:auto;bottom:96px;min-height:54px;justify-content:flex-start}
+  #stage>.experience-buttons{left:auto;right:12px;bottom:96px;min-height:54px}
+}
+
+/* Personalización en visores estrechos */
+@container(max-width:680px){
+  #custom-panel .custom-row-title{flex-wrap:wrap;gap:10px}
+  #custom-panel .custom-color-label{margin-left:auto}
+}
+
+/* Visor muy estrecho: separar las acciones en tres filas */
+@container(max-width:500px){
+  #stage>.section-tools{left:12px;right:12px;bottom:156px;justify-content:center}
+  #stage>.experience-buttons{left:12px;right:12px;bottom:92px;justify-content:center}
+  #stage>.toolbar{bottom:16px}
+}
+
+@media(max-width:420px){
+  header strong{max-width:180px;font-size:16px}
+  .version-controls{left:16px;max-width:calc(100% - 32px);gap:7px}
+  .version-option,#customize{padding:0 11px;font-size:11px}
+  #custom-panel{max-width:calc(100vw - 32px);padding:16px}
+}
+
+@media(prefers-reduced-motion:reduce){
+  button{transition:none}
+}
